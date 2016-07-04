@@ -26,7 +26,7 @@ output "subnet_ids" {
 }
 
 resource "aws_security_group" "sg" {
-  name = "${var.context_org}-${var.context_env}-${var.app_service_name}"
+  name = "${var.app_service_name}"
   description = "Service ${var.app_service_name}"
 
   vpc_id = "${data.terraform_remote_state.env.vpc_id}"
@@ -36,6 +36,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags {
+    "Name" = "${var.context_org}-${var.context_env}-${var.app_service_name}-${element(data.terraform_remote_state.global.az_names,count.index)}"
     "App" = "${var.app_name}"
 		"Service" = "${var.app_service_name}"
     "Provisioner" = "tf"
