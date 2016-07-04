@@ -1,0 +1,6 @@
+{
+  "require": [
+    "global-xxx",
+    "env-xxx"
+  ]
+}
